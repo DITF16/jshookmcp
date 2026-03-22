@@ -78,6 +78,9 @@ export class PageNavigationHandlers {
 
     await this.deps.pageController.navigate(url, { waitUntil, timeout });
 
+    // 添加延迟确保Chrome地址栏已更新
+    await new Promise(resolve => setTimeout(resolve, 100));
+
     const currentUrl = await this.deps.pageController.getURL();
     const title = await this.deps.pageController.getTitle();
 
